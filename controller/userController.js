@@ -21,3 +21,4 @@ exports.getAllUser = async (req, res, next) => {
     data: users,
   });
 };
+
