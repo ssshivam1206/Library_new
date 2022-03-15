@@ -3,7 +3,7 @@ const { promisify } = require('util');
 const User = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
-//const sendEmail = require('../utils/email');
+const sendEmail = require('../utils/email');
 
 const signtoken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -34,11 +34,12 @@ exports.signUp = catchAsync(async (req, res, next) => {
     gender: req.body.gender,
   });
 
-  // sendEmail({
-  //   to: newUser.email,
-  //   subject: 'welcome to library',
-  //   message: 'welcome to library ',
-  // });
+  await sendEmail({
+    to: newUser.email,
+    subject: 'welcome to library',
+    text: 'welcome to library ',
+  });
+
   createSendToken(newUser, 201, res);
 });
 

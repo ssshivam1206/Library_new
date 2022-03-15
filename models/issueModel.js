@@ -19,9 +19,10 @@ const issueSchema = new mongoose.Schema({
       type: mongoose.Schema.ObjectId,
       ref: 'User',
     },
-    userName: String,
   },
   createAt: { type: Date, default: Date.now() },
 });
 
 const Issue = mongoose.model('Issue', issueSchema);
+
+module.exports = Issue;
